@@ -1,0 +1,27 @@
+{
+  "name": "ledgerly-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev:login",
+    "dev:login": "vite --config finance-login/vite.config.js --host 0.0.0.0",
+    "dev:dashboard": "vite --config dashboard/vite.config.js --host 0.0.0.0",
+    "build:login": "vite build --config finance-login/vite.config.js",
+    "build:dashboard": "vite build --config dashboard/vite.config.js",
+    "serve:login": "vite preview --config finance-login/vite.config.js --host 0.0.0.0",
+    "serve:dashboard": "vite preview --config dashboard/vite.config.js --host 0.0.0.0"
+  },
+  "dependencies": {
+    "lucide-react": "^0.545.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "recharts": "^2.15.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "tailwindcss": "^4.1.14",
+    "vite": "^7.3.2"
+  }
+}
