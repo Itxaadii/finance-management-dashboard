@@ -7,12 +7,14 @@ require("dotenv").config();
 const User = require("./models/Users");
 const Account = require("./models/Account");
 const Transaction = require("./models/Transaction");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 
 // Basic test route
 app.get("/", (req, res) => {
@@ -82,4 +84,4 @@ mongoose
     })
     .catch((error) => {
         console.error("MongoDB connection failed:", error.message);
-    });
+    });   
