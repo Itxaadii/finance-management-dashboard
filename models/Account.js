@@ -44,7 +44,18 @@ const accountSchema = new mongoose.Schema(
         plaidAccountId: {
             type: String,
             default: null
-        }
+        },
+       
+        plaidItemId: {
+         type: String,
+         default: null
+        },
+
+       plaidAccessToken: {
+         type: String,
+         default: null
+        },
+
     },
     {
         timestamps: true
