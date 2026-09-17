@@ -8,6 +8,7 @@ const User = require("./models/Users");
 const Account = require("./models/Account");
 const Transaction = require("./models/Transaction");
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 // Basic test route
 app.get("/", (req, res) => {
@@ -84,4 +86,4 @@ mongoose
     })
     .catch((error) => {
         console.error("MongoDB connection failed:", error.message);
-    });   
+    });     
