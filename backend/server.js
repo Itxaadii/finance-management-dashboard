@@ -9,6 +9,7 @@ const Account = require("./models/Account");
 const Transaction = require("./models/Transaction");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const plaidRoutes =require("./routes/plaidRoutes");
 
 const app = express();
 
@@ -17,59 +18,11 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/plaid",plaidRoutes);
 
 // Basic test route
 app.get("/", (req, res) => {
     res.send("PFM Dashboard Backend is running!");
-});
-
-// Model testing route
-app.get("/test-models", async (req, res) => {
-    try {
-        // Create User
-        const user = await User.create({
-            name: "Test User",
-            email: "testuser@example.com",
-            password: "testpassword123"
-        });
-
-        // Create Account
-        const account = await Account.create({
-            user: user._id,
-            name: "Test Savings Account",
-            type: "bank",
-            institution: "Test Bank",
-            balance: 10000,
-            currency: "INR"
-        });
-
-        // Create Transaction
-        const transaction = await Transaction.create({
-            user: user._id,
-            account: account._id,
-            amount: 500,
-            type: "expense",
-            category: "Food",
-            description: "Test grocery purchase",
-            merchant: "Test Store",
-            currency: "INR"
-        });
-
-        res.json({
-            message: "All models tested successfully",
-            user: user,
-            account: account,
-            transaction: transaction
-        });
-
-    } catch (error) {
-        console.error(error);
-
-        res.status(500).json({
-            message: "Model testing failed",
-            error: error.message
-        });
-    }
 });
 
 // MongoDB connection
