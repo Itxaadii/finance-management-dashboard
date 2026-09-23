@@ -1,6 +1,7 @@
 const plaidService = require("../services/plaidService");
 const Account = require("../models/Account");
 const Transaction = require("../models/Transaction");
+const { categorizeTransaction } = require("../services/categoryService");
 
 const createLinkToken = async (req, res) => {
     try {
@@ -116,8 +117,10 @@ const getTransactions = async (req, res) => {
             account: account._id,
             amount: Math.abs(transaction.amount),
             type: transaction.amount < 0 ? "income" : "expense",
-            category:
-                transaction.personal_finance_category?.primary || "Other",
+            category: categorizeTransaction(
+                transaction.merchant_name,
+                transaction.name
+            ),
             description: transaction.name,
             transactionDate: new Date(transaction.date),
             merchant: transaction.merchant_name || transaction.name,
