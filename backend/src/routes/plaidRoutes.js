@@ -2,11 +2,12 @@ const express= require("express");
 const plaidClient= require("../config/plaidClient");
 const Account = require("../models/Account");
 const Transaction = require("../models/Transaction");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.post("/create-link-token",async (req, res)=>{
-    try{
+router.post("/create-link-token", authMiddleware, async (req, res) => {   
+     try{
         const response= await plaidClient.linkTokenCreate({
             client_id: process.env.PLAID_CLIENT_ID,
             secret: process.env.PLAID_SECRET,
@@ -32,10 +33,10 @@ router.post("/create-link-token",async (req, res)=>{
         });
     }
 });
-router.post("/exchange-token", async (req, res) => {
+router.post("/exchange-token", authMiddleware, async (req, res) => {    
     try {
         const { public_token } = req.body;
-        const userId = "6aa81c3fd9f9b1cfc6723744";
+        const userId = req.user.userId;
 
         if (!public_token) {
             return res.status(400).json({
@@ -82,7 +83,7 @@ router.post("/exchange-token", async (req, res) => {
     }
 });
 
-router.post("/sandbox-public-token", async (req, res) => {
+router.post("/sandbox-public-token", authMiddleware, async (req, res) => {  
     try {
         const response = await plaidClient.sandboxPublicTokenCreate({
             institution_id: "ins_109508",
@@ -107,7 +108,7 @@ router.post("/sandbox-public-token", async (req, res) => {
 });
 router.get("/transactions", async (req, res) => {
     try {
-        const userId = "6aa81c3fd9f9b1cfc6723744";
+        const userId = req.user.userId;
 
         const account = await Account.findOne({
             user: userId,
@@ -181,4 +182,4 @@ router.get("/transactions", async (req, res) => {
 });
 
 
-module.exports = router;
+module.exports = router;  
