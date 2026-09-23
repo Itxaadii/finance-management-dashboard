@@ -11,6 +11,7 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const plaidRoutes =require("./routes/plaidRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
+const accountRoutes = require("./routes/accountRoutes");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/plaid",plaidRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/accounts", accountRoutes);
 
 // Basic test route
 app.get("/", (req, res) => {
