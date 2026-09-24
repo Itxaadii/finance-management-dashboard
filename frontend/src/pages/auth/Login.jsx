@@ -10,7 +10,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
-function Home() {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
@@ -242,8 +242,5 @@ function Home() {
   );
 }
 
-function App() {
-  return <Home />;
-}
 
-export default App;
+export default Login;
