@@ -4,9 +4,14 @@ const getAccounts = async (req, res) => {
     try {
         const userId = req.user.userId;
 
-        const accounts = await Account.find({
-            user: userId
-        });
+        console.log("Logged-in user ID:", userId);
+
+        // const accounts = await Account.find({
+        //     user: userId
+        // });
+        const accounts = await Account.find({});
+
+        console.log("All accounts:", accounts);
 
         res.status(200).json(accounts);
     } catch (error) {
